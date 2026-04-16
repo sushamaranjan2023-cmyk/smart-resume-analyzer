@@ -167,30 +167,6 @@ Analyzes resume against a job description.
 
 ---
 
-## Git & Deployment
-
-### Push to GitHub
-```bash
-git init
-git remote add origin https://github.com/sushamaranjan2023-cmyk/smart-resume-analyzer.git
-git add .
-git commit -m "Initial commit"
-git push -u origin main
-```
-
-### `.gitignore` (important)
-Ensure these are in your `.gitignore`:
-```gitignore
-.env
-.env.*
-!.env.example
-vendor/
-node_modules/
-var/
-```
-
----
-
 ## Author
 **Sushama Ranjan**
 - **GitHub**: [github.com/sushamaranjan2023-cmyk](https://github.com/sushamaranjan2023-cmyk)
