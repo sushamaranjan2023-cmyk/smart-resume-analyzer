@@ -162,8 +162,7 @@ Analyzes resume against a job description.
 5. Copy the key (starts with `gsk_`)
 6. Add to `.env` as `GROQ_API_KEY=gsk_...`
 
-> [!WARNING]
-> Never commit your API key to Git. Add `.env` to `.gitignore`.
+## GROQ is currently being used as i have already subscription of this. However, we can also consider alternatives like OpenAI or other AI providers if needed.
 
 ---
 
