@@ -1,0 +1,200 @@
+# Smart Resume Analyzer
+**AI-Powered Resume Feedback Tool**
+*Symfony 6.4 Backend  |  React + Vite Frontend  |  Groq AI*
+
+## Overview
+Smart Resume Analyzer is a full-stack web application that helps job seekers improve their resumes. Users paste a job description and their resume text; the system uses Groq's free AI API to return a match score, missing skills, and actionable suggestions.
+
+## Tech Stack
+* **Backend**: Symfony 6.4 (PHP)
+* **Frontend**: React 18 + Vite
+* **AI Provider**: Groq API (Free tier)
+* **AI Model**: `llama-3.1-8b-instant`
+* **Authentication**: JWT (LexikJWT)
+* **CORS**: `NelmioCorsBundle`
+
+**Repo**: [github.com/sushamaranjan2023-cmyk/smart-resume-analyzer](https://github.com/sushamaranjan2023-cmyk/smart-resume-analyzer)
+
+## Features
+- Paste job description + resume text in a clean React UI
+- AI-powered match score (0-100%) using Groq LLaMA3
+- Missing skills detection with gap analysis
+- Actionable improvement suggestions
+- JWT-based authentication (stateless API)
+- CORS-enabled for local dev and production
+
+---
+
+## Detailed Tech Stack
+### Backend (Symfony 6.4)
+- **Framework**: Symfony Skeleton ^6.4
+- **Maker Bundle**: `symfony/maker-bundle`
+- **CORS**: `nelmio/cors-bundle`
+- **JWT Auth**: `lexik/jwt-authentication-bundle` ^2.18
+- **HTTP Client**: `symfony/http-client`
+- **PHP**: 8.1+
+
+### Frontend (React + Vite)
+- **Build Tool**: Vite v8 (`npm create vite@latest`)
+- **Framework**: React 18
+- **HTTP Client**: `axios`
+- **Dev Server**: `http://localhost:5173`
+- **Node**: 18+
+
+### AI Integration
+- **Provider**: Groq (free tier)
+- **Model**: `llama-3.1-8b-instant`
+- **API Base**: `https://api.groq.com/openai/v1/chat/completions`
+- **Key Prefix**: `gsk_...`
+
+---
+
+## Project Structure
+Repository layout:
+```text
+smart-resume-analyzer/
+├── resume-ai/              # Symfony backend
+│   ├── src/
+│   │   ├── Controller/     # ResumeAnalyzerController.php
+│   │   └── Service/        # GroqService.php
+│   ├── config/
+│   │   └── packages/
+│   │       └── nelmio_cors.yaml
+│   └── .env
+└── ai-resume-frontend/     # React + Vite frontend
+    ├── src/
+    │   ├── App.jsx
+    │   └── components/
+    │       └── ResumeForm.jsx
+    └── package.json
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+- PHP 8.1+ and Composer
+- Node.js 18+ and npm
+- Symfony CLI
+- Groq API key (free at [console.groq.com](https://console.groq.com))
+
+### Backend Setup
+1. **Create Symfony project**
+   ```bash
+   composer create-project symfony/skeleton:^6.4 resume-ai
+   cd resume-ai
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer require symfony/maker-bundle
+   composer require nelmio/cors-bundle
+   composer require lexik/jwt-authentication-bundle:^2.18
+   composer require symfony/http-client
+   ```
+
+3. **Configure CORS**
+   Edit `config/packages/nelmio_cors.yaml`:
+   ```yaml
+   nelmio_cors:
+       defaults:
+           origin_regex: true
+           allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
+           allow_methods: ['GET', 'POST', 'OPTIONS']
+           allow_headers: ['Content-Type', 'Authorization']
+   ```
+
+4. **Configure environment**
+   Edit `.env`:
+   ```env
+   CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
+   GROQ_API_KEY=gsk_your_key_here
+   ```
+
+5. **Start Symfony server**
+   ```bash
+   symfony server:start
+   ```
+
+### Frontend Setup
+1. **Create React app**
+   ```bash
+   npm create vite@latest ai-resume-frontend -- --template react
+   cd ai-resume-frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install axios
+   npm run dev
+   ```
+   Frontend runs at: `http://localhost:5173`
+
+---
+
+## API Reference
+**POST** `/api/analyze`
+Analyzes resume against a job description.
+
+**Request body (JSON):**
+```json
+{
+  "jd": "Senior PHP Developer with Symfony experience...",
+  "resume": "10 years PHP, Symfony, MySQL, AWS..."
+}
+```
+
+**Response (JSON):**
+```json
+{
+  "feedback": "Your markdown-formatted resume feedback..."
+}
+```
+
+---
+
+## Getting a Free Groq API Key
+1. Visit https://console.groq.com
+2. Sign up with GitHub or email
+3. Navigate to API Keys section
+4. Click Create API Key
+5. Copy the key (starts with `gsk_`)
+6. Add to `.env` as `GROQ_API_KEY=gsk_...`
+
+> [!WARNING]
+> Never commit your API key to Git. Add `.env` to `.gitignore`.
+
+---
+
+## Git & Deployment
+
+### Push to GitHub
+```bash
+git init
+git remote add origin https://github.com/sushamaranjan2023-cmyk/smart-resume-analyzer.git
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+```
+
+### `.gitignore` (important)
+Ensure these are in your `.gitignore`:
+```gitignore
+.env
+.env.*
+!.env.example
+vendor/
+node_modules/
+var/
+```
+
+---
+
+## Author
+**Sushama Ranjan**
+- **GitHub**: [github.com/sushamaranjan2023-cmyk](https://github.com/sushamaranjan2023-cmyk)
+- **Role**: Technical Lead | Solution Architect
+
+---
+*Smart Resume Analyzer • Built with Symfony + React + Groq AI • MIT License*
